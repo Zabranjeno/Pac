@@ -1,11 +1,12 @@
-// Ads-Blocking Proxy Auto-Configuration (PAC) File
-// Author: Gorstak
+// Merged Proxy Auto-Configuration (PAC) File
+// Combines ad-blocking from BlockAds.pac with proxy selection from proxy.pac
+// Author: Gorstak (ad-blocking), adapted for proxy selection
 
 // Configuration Variables
-var normal = "DIRECT";              // Default pass-through for non-blocked traffic
 var blackhole = "PROXY 127.0.0.1:3421"; // Blackhole proxy for blocked traffic
-var isEnabled = 1;                  // Toggle for enabling/disabling ad-blocking (1 = enabled)
-var debug = 0;                      // Debugging flag (1 = enabled)
+var isEnabled = 1;                      // Toggle for enabling/disabling ad-blocking (1 = enabled)
+var debug = 0;                          // Debugging flag (1 = enabled)
+var proxies = ["1.2.3.4:5678", "5.6.7.8:9012"]; // Proxy servers from proxy.pac
 
 // Whitelist: Domains explicitly allowed, bypassing all filters
 var whitelist = [
@@ -353,6 +354,60 @@ var blacklist = [
     "adbureau.net"
 ];
 
+// Function to convert character to ASCII code (from proxy.pac)
+function atoi(char) {
+    if (char == 'a') return 0x61;
+    if (char == 'b') return 0x62;
+    if (char == 'c') return 0x63;
+    if (char == 'd') return 0x64;
+    if (char == 'e') return 0x65;
+    if (char == 'f') return 0x66;
+    if (char == 'g') return 0x67;
+    if (char == 'h') return 0x68;
+    if (char == 'i') return 0x69;
+    if (char == 'j') return 0x6a;
+    if (char == 'k') return 0x6b;
+    if (char == 'l') return 0x6c;
+    if (char == 'm') return 0x6d;
+    if (char == 'n') return 0x6e;
+    if (char == 'o') return 0x6f;
+    if (char == 'p') return 0x70;
+    if (char == 'q') return 0x71;
+    if (char == 'r') return 0x72;
+    if (char == 's') return 0x73;
+    if (char == 't') return 0x74;
+    if (char == 'u') return 0x75;
+    if (char == 'v') return 0x76;
+    if (char == 'w') return 0x77;
+    if (char == 'x') return 0x78;
+    if (char == 'y') return 0x79;
+    if (char == 'z') return 0x7a;
+    if (char == '0') return 0x30;
+    if (char == '1') return 0x31;
+    if (char == '2') return 0x32;
+    if (char == '3') return 0x33;
+    if (char == '4') return 0x34;
+    if (char == '5') return 0x35;
+    if (char == '6') return 0x36;
+    if (char == '7') return 0x37;
+    if (char == '8') return 0x38;
+    if (char == '9') return 0x39;
+    if (char == '.') return 0x2e;
+    return 0x20;
+}
+
+// Function to calculate host hash (from proxy.pac)
+function hostHash(host) {
+    var hash = 0;
+    var lowerHost = host.toLowerCase();
+    if (lowerHost.length == 0) return hash;
+    for (var i = 0; i < lowerHost.length; i++) {
+        var charCode = atoi(lowerHost.substring(i, i + 1));
+        hash = hash + charCode;
+    }
+    return hash;
+}
+
 // Main Proxy Auto-Configuration Function
 function FindProxyForURL(url, host) {
     // Convert inputs to lowercase for case-insensitive matching
@@ -375,9 +430,13 @@ function FindProxyForURL(url, host) {
         return blackhole;
     }
 
-    // If ad-blocking is disabled, pass all traffic
+    // If ad-blocking is disabled, route through proxy
     if (!isEnabled) {
-        return normal;
+        var hash = hostHash(host);
+        var index = hash % proxies.length;
+        var selectedProxy = proxies[index];
+        var alternateProxy = proxies[(index + 1) % proxies.length];
+        return "PROXY " + selectedProxy + "; PROXY " + alternateProxy;
     }
 
     // Local network bypass (e.g., LAN, loopback)
@@ -387,14 +446,18 @@ function FindProxyForURL(url, host) {
         shExpMatch(host, "192.168.*") ||
         shExpMatch(host, "127.*") ||
         dnsDomainIs(host, ".local")) {
-        return normal;
+        return "DIRECT";
     }
 
     // Whitelist check: Allow explicitly whitelisted domains
     for (var i = 0; i < whitelist.length; i++) {
         if (shExpMatch(host, whitelist[i])) {
             if (debug) alert("Whitelisted: " + host);
-            return normal;
+            var hash = hostHash(host);
+            var index = hash % proxies.length;
+            var selectedProxy = proxies[index];
+            var alternateProxy = proxies[(index + 1) % proxies.length];
+            return "PROXY " + selectedProxy + "; PROXY " + alternateProxy;
         }
     }
 
@@ -415,12 +478,16 @@ function FindProxyForURL(url, host) {
         return blackhole;
     }
 
-    // Default: Pass through all non-matching traffic
+    // Default: Route non-matching traffic through proxy
     if (debug) alert("Not Blocked...\nURL: " + url + "\nHost: " + host);
-    return normal;
+    var hash = hostHash(host);
+    var index = hash % proxies.length;
+    var selectedProxy = proxies[index];
+    var alternateProxy = proxies[(index + 1) % proxies.length];
+    return "PROXY " + selectedProxy + "; PROXY " + alternateProxy;
 }
 
 // Initial load notification (if debugging is enabled)
 if (debug) {
-    alert("Ad-blocking PAC file loaded, isEnabled = " + isEnabled);
+    alert("Merged PAC file loaded, isEnabled = " + isEnabled);
 }
