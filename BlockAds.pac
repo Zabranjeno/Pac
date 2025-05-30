@@ -1,10 +1,10 @@
-// Updated Proxy Auto-Configuration (PAC) File
-// Focuses on reliable ad-blocking with safe defaults
-// Author: Gorstak (ad-blocking), adapted for reliability
+// Enhanced Proxy Auto-Configuration (PAC) File
+// Focuses on robust ad-blocking with reliable connectivity
+// Author: Gorstak (ad-blocking), adapted for enhanced ad-blocking
 
 // Configuration Variables
 var normal = "DIRECT";                  // Default pass-through for non-blocked traffic
-var blackhole = "PROXY 0.0.0.0:0";     // Null proxy to drop ad traffic (no server required)
+var blackhole = "PROXY 127.0.0.1:65535"; // Use high port to drop ad traffic (no server required)
 var isEnabled = 1;                      // Toggle for enabling/disabling ad-blocking (1 = enabled)
 var debug = 1;                          // Debugging flag (1 = enabled for troubleshooting)
 
@@ -34,24 +34,24 @@ var whitelist = [
     "aliexpress.com",
     "tenor.com",
     "media.tenor.com",
-    "google.com",        // Essential for search
+    "google.com",
     "www.google.com",
-    "example.com"       // Add any other critical domains
+    "example.com"       // Add your critical domains here
 ];
 
 // Comprehensive Regular Expression for Ad/Tracking Domains and Subdomains
-var adDomainRegex = /^(?:.*[-_.])?(ads?|adv(ert(s|ising)?)?|banners?|track(er|ing|s)?|beacons?|doubleclick|adservice|adnxs|adtech|googleads|gads|adwords|partner|sponsor(ed)?|click(s|bank|tale|through)?|pop(up|under)s?|promo(tion)?|market(ing|er)?|affiliates?|metrics?|stat(s|counter|istics)?|analytics?|pixel(s)?|campaign|traff(ic|iq)|monetize|syndicat(e|ion)|revenue|yield|impress(ion)?s?|conver(sion|t)?|audience|target(ing)?|behavior|profil(e|ing)|telemetry|survey|poll|outbrain|taboola|quantcast|scorecard|omniture|comscore|krux|bluekai|exelate|adform|adroll|rubicon|vungle|inmobi|flurry|mixpanel|heap|amplitude|optimizely|bizible|pardot|hubspot|marketo|eloqua|salesforce|media(math|net)|criteo|appnexus|turn|adbrite|admob|adsonar|adscale|zergnet|revcontent|mgid|nativeads|contentad|displayads|bannerflow|adblade|adcolony|chartbeat|newrelic|pingdom|gauges|kissmetrics|webtrends|tradedesk|bidder|auction|rtb|programmatic|splash|interstitial|overlay)\./i;
+var adDomainRegex = /^(?:.*[-_.])?(ads?|adv(ert(s|ising)?)?|banners?|track(er|ing|s)?|beacons?|doubleclick|adservice|adnxs|adtech|googleads|gads|adwords|partner|sponsor(ed)?|click(s|bank|tale|through)?|pop(up|under)s?|promo(tion)?|market(ing|er)?|affiliates?|metrics?|stat(s|counter|istics)?|analytics?|pixel(s)?|campaign|traff(ic|iq)|monetize|syndicat(e|ion)|revenue|yield|impress(ion)?s?|conver(sion|t)?|audience|target(ing)?|behavior|profil(e|ing)|telemetry|survey|poll|outbrain|taboola|quantcast|scorecard|omniture|comscore|krux|bluekai|exelate|adform|adroll|rubicon|vungle|inmobi|flurry|mixpanel|heap|amplitude|optimizely|bizible|pardot|hubspot|marketo|eloqua|salesforce|media(math|net)|criteo|appnexus|turn|adbrite|admob|adsonar|adscale|zergnet|revcontent|mgid|nativeads|contentad|displayads|bannerflow|adblade|adcolony|chartbeat|newrelic|pingdom|gauges|kissmetrics|webtrends|tradedesk|bidder|auction|rtb|programmatic|splash|interstitial|overlay|adpush|adnetwork|adexchange|adclick|adserving)\./i;
 
 // Regular Expression for Ad-Related URL Patterns
-var adUrlRegex = /(?:\/(?:adcontent|img\/adv|web\-ad|iframead|contentad|ad\/image|video\-ad|stats\/event|xtclicks|adscript|bannerad|googlead|adhandler|adimages|embed\-log|adconfig|tracking\/track|tracker\/track|adrequest|nativead|adman|advertisement|adframe|adcontrol|adoverlay|adserver|adsense|google\-ads|ad\-banner|banner\-ad|campaign\/advertiser|adplacement|adblockdetect|advertising|admanagement|adprovider|adrotation|adtop|adbottom|adleft|adright|admiddle|adlarge|adsmall|admicro|adunit|adcall|adlog|adcount|adserve|adsrv|adsys|adtrack|adview|adwidget|adzone|banner\/adv|google_tag|image\/ads|sidebar\-ads|footer\-ads|top\-ads|bottom\-ads|new\-ads|search\-ads|lazy\-ads|responsive\-ads|dynamic\/ads|external\/ads|mobile\-ads|house\-ads|blog\/ads|online\/ads|pc\/ads|left\-ads|right\-ads|ads\/square|ads\/text|ads\/html|ads\/js|ads\.php|ad\.js|ad\.css|\?affiliate=|\?advertiser=|\&adspace=|\&adserver=|\&adgroupid=|\&adpageurl=|\.adserve|\.ads\d|\.adspace|\.adsense|\.adserver|\.google\-ads|\.banner\-ad|\.ad\-banner|\.adplacement|\.advertising|\.admanagement|\.adprovider|\.adrotation|\.adtop|\.adbottom|\.adleft|\.adright|\.admiddle|\.adlarge|\.adsmall|\.admicro|\.adunit|\.adcall|\.adlog|\.adcount|\.adserve|\.adsrv|\.adsys|\.adtrack|\.adview|\.adwidget|\.adzone))/i;
+var adUrlRegex = /(?:\/(?:adcontent|img\/adv|web\-ad|iframead|contentad|ad\/image|video\-ad|stats\/event|xtclicks|adscript|bannerad|googlead|adhandler|adimages|embed\-log|adconfig|tracking\/track|tracker\/track|adrequest|nativead|adman|advertisement|adframe|adcontrol|adoverlay|adserver|adsense|google\-ads|ad\-banner|banner\-ad|campaign\/advertiser|adplacement|adblockdetect|advertising|admanagement|adprovider|adrotation|adtop|adbottom|adleft|adright|admiddle|adlarge|adsmall|admicro|adunit|adcall|adlog|adcount|adserve|adsrv|adsys|adtrack|adview|adwidget|adzone|banner\/adv|google_tag|image\/ads|sidebar\-ads|footer\-ads|top\-ads|bottom\-ads|new\-ads|search\-ads|lazy\-ads|responsive\-ads|dynamic\/ads|external\/ads|mobile\-ads|house\-ads|blog\/ads|online\/ads|pc\/ads|left\-ads|right\-ads|ads\/square|ads\/text|ads\/html|ads\/js|ads\.php|ad\.js|ad\.css|\?affiliate=|\?advertiser=|\&adspace=|\&adserver=|\&adgroupid=|\&adpageurl=|\.adserve|\.ads\d|\.adspace|\.adsense|\.adserver|\.google\-ads|\.banner\-ad|\.ad\-banner|\.adplacement|\.advertising|\.admanagement|\.adprovider|\.adrotation|\.adtop|\.adbottom|\.adleft|\.adright|\.admiddle|\.adlarge|\.adsmall|\.admicro|\.adunit|\.adcall|\.adlog|\.adcount|\.adserve|\.adsrv|\.adsys|\.adtrack|\.adview|\.adwidget|\.adzone|\/ads\/|\/ad\/|\/promo\/|\/sponsored\/))/i;
 
 // Regular Expression for Common Ad Subdomains
-var adSubdomainRegex = /^(?:adcreative(s)?|imageserv|media(mgr)?|stats|switch|track(2|er)?|view|ad(s)?\d{0,3}|banner(s)?\d{0,3}|click(s)?\d{0,3}|count(er)?\d{0,3}|servedby\d{0,3}|toolbar\d{0,3}|pageads\d{0,3}|pops\d{0,3}|promos\d{0,3})\./i;
+var adSubdomainRegex = /^(?:adcreative(s)?|imageserv|media(mgr)?|stats|switch|track(2|er)?|view|ad(s)?\d{0,3}|banner(s)?\d{0,3}|click(s)?\d{0,3}|count(er)?\d{0,3}|servedby\d{0,3}|toolbar\d{0,3}|pageads\d{0,3}|pops\d{0,3}|promos\d{0,3}|adserver|adsrv|adpush)\./i;
 
 // Regular Expression for Web Bugs and Flash Ads
-var adWebBugRegex = /(?:\/(?:1|blank|b|clear|pixel|transp|spacer)\.gif|\.swf)$/i;
+var adWebBugRegex = /(?:\/(?:1|blank|b|clear|pixel|transp|spacer)\.gif|\.swf|\.js\?ad=|\.jpg\?ad=|\.png\?ad=)$/i;
 
-// Blacklist: Explicitly blocked domains (updated with modern ad networks)
+// Blacklist: Explicitly blocked domains (expanded for modern ad networks)
 var blacklist = [
     "doubleclick.net",
     "googlesyndication.com",
@@ -111,7 +111,7 @@ var blacklist = [
     "eloqua.com",
     "salesforce.com",
     "media.net",
-    "ads.google.com",    // Added for Google Ads
+    "ads.google.com",
     "tpc.googlesyndication.com",
     "pagead2.googlesyndication.com",
     "ad.doubleclick.net",
@@ -119,13 +119,32 @@ var blacklist = [
     "pubads.g.doubleclick.net",
     "adserver.adtech.de",
     "adserver.adtechus.com",
-    "adsafeprotected.com", // Modern ad verification
-    "moatads.com",         // Ad analytics
-    "serving-sys.com",     // Sizmek ad platform
-    "openx.net",           // OpenX ad exchange
-    "pubmatic.com",        // PubMatic ad platform
-    "indexww.com",         // Index Exchange
-    "smartadserver.com"    // Smart AdServer
+    "adsafeprotected.com",
+    "moatads.com",
+    "serving-sys.com",
+    "openx.net",
+    "pubmatic.com",
+    "indexww.com",
+    "smartadserver.com",
+    "adpushup.com",
+    "adentifi.com",
+    "infolinks.com",
+    "bidswitch.net",
+    "contextweb.com",
+    "lijit.com",
+    "sharethrough.com",
+    "sovrn.com",
+    "gumgum.com",
+    "teads.tv",
+    "yieldmo.com",
+    "kargo.com",
+    "adform.net",
+    "rtbhouse.com",
+    "criteo.net",
+    "amazon-adsystem.com",
+    "adsrvr.org",
+    "taboola.com",
+    "outbrain.com"
 ];
 
 // Main Proxy Auto-Configuration Function
@@ -201,5 +220,5 @@ function FindProxyForURL(url, host) {
 
 // Initial load notification (if debugging is enabled)
 if (debug) {
-    alert("Updated PAC file loaded, isEnabled = " + isEnabled);
+    alert("Enhanced PAC file loaded, isEnabled = " + isEnabled);
 }
