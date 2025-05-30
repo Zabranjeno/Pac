@@ -2,7 +2,7 @@
 // Author: Gorstak
 
 // Configuration Variables
-var normal =  ["PROXY 47.251.87.74:9080", "PROXY 8.211.195.139:28737"];
+var normal = "DIRECT";              // Default pass-through for non-blocked traffic
 var blackhole = "PROXY 127.0.0.1:3421"; // Blackhole proxy for blocked traffic
 var isEnabled = 1;                  // Toggle for enabling/disabling ad-blocking (1 = enabled)
 var debug = 0;                      // Debugging flag (1 = enabled)
