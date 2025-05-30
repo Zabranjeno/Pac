@@ -4,7 +4,7 @@
 
 // Configuration Variables
 var blackhole = "PROXY 127.0.0.1:65535"; // Null proxy for ads
-var proxies = ["192.155.89.77:8080", "68.71.76.242:8082"]; // REPLACE with real US proxies from https://www.proxynova.com/proxy-server-list/
+var proxies = ["47.251.87.74:9080", "8.211.195.139:28737"]; // REPLACE with real US proxies from https://www.proxynova.com/proxy-server-list/
 var isEnabled = 1;                      // Ad-blocking toggle (1 = enabled)
 var debug = 1;                          // Debugging flag (1 = enabled)
 
