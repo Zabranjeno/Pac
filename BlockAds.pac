@@ -1,10 +1,10 @@
-// Fixed Merged Proxy Auto-Configuration (PAC) File
-// Combines ad-blocking from BlockAds.pac with safe defaults
+// Updated Proxy Auto-Configuration (PAC) File
+// Focuses on reliable ad-blocking with safe defaults
 // Author: Gorstak (ad-blocking), adapted for reliability
 
 // Configuration Variables
 var normal = "DIRECT";                  // Default pass-through for non-blocked traffic
-var blackhole = "PROXY 127.0.0.1:3421"; // Blackhole proxy for blocked traffic
+var blackhole = "PROXY 0.0.0.0:0";     // Null proxy to drop ad traffic (no server required)
 var isEnabled = 1;                      // Toggle for enabling/disabling ad-blocking (1 = enabled)
 var debug = 1;                          // Debugging flag (1 = enabled for troubleshooting)
 
@@ -20,7 +20,7 @@ var whitelist = [
     "ebay.com",
     "yahoo.com",
     "discord.com",
-    "click.discord.comोग
+    "click.discord.com",
     "discordapp.com",
     "cdn.discordapp.com",
     "cdn.discord.app",
@@ -34,8 +34,8 @@ var whitelist = [
     "aliexpress.com",
     "tenor.com",
     "media.tenor.com",
-    "google.com",        // Added to ensure basic connectivity
-    "*.google.com",
+    "google.com",        // Essential for search
+    "www.google.com",
     "example.com"       // Add any other critical domains
 ];
 
@@ -51,7 +51,7 @@ var adSubdomainRegex = /^(?:adcreative(s)?|imageserv|media(mgr)?|stats|switch|tr
 // Regular Expression for Web Bugs and Flash Ads
 var adWebBugRegex = /(?:\/(?:1|blank|b|clear|pixel|transp|spacer)\.gif|\.swf)$/i;
 
-// Blacklist: Explicitly blocked domains
+// Blacklist: Explicitly blocked domains (updated with modern ad networks)
 var blacklist = [
     "doubleclick.net",
     "googlesyndication.com",
@@ -111,250 +111,21 @@ var blacklist = [
     "eloqua.com",
     "salesforce.com",
     "media.net",
-    "247media.com",
-    "247realmedia.com",
-    "2o7.net",
-    "3721.com",
-    "180solutions.com",
-    "zedo.com",
-    "zango.com",
-    "virtumundo.com",
-    "valueclick.com",
-    "vonna.com",
-    "webtrendslive.com",
-    "weatherbug.com",
-    "webhancer.com",
-    "websponsors.com",
-    "xiti.com",
-    "xxxcounter.com",
-    "myway.com",
-    "mysearch.com",
-    "mygeek.com",
-    "mycomputer.com",
-    "moreover.com",
-    "mspaceads.com",
-    "mediaplex.com",
-    "madserver.net",
-    "netgravity.com",
-    "networldmedia.net",
-    "overture.com",
-    "oingo.com",
-    "ourtoolbar.com",
-    "offeroptimizer.com",
-    "offshoreclicks.com",
-    "opistat.com",
-    "opentracker.net",
-    "paypopup.com",
-    "paycounter.com",
-    "popupsponsor.com",
-    "popupmoney.com",
-    "p2l.info",
-    "pharmacyfarm.info",
-    "popupad.net",
-    "pharmacyheaven.biz",
-    "qsrch.com",
-    "quigo.com",
-    "qckads.com",
-    "realmedia.com",
-    "radiate.com",
-    "redsheriff.com",
-    "realtracker.com",
-    "readnotify.com",
-    "searchx.cc",
-    "sextracker.com",
-    "sabela.com",
-    "spywarequake.com",
-    "spywarestrike.com",
-    "searchmiracle.com",
-    "starware.com",
-    "starwave.com",
-    "swirve.com",
-    "spyaxe.com",
-    "spylog.com",
-    "search.com",
-    "servik.com",
-    "searchfuel.com",
-    "search.com.com",
-    "spyfalcon.com",
-    "sitemeter.com",
-    "statcounter.com",
-    "sitestats.com",
-    "superstats.com",
-    "sitestat.com",
-    "sexlist.com",
-    "scaricare.ws",
-    "speedera.net",
-    "targetpoint.com",
-    "tempx.cc",
-    "topx.cc",
-    "trafficsyndicate.com",
-    "teknosurf.com",
-    "timesink.com",
-    "tradedoubler.com",
-    "thecounter.com",
-    "targetwords.com",
-    "telecharger-en-francais.com",
-    "trafficserverstats.com",
-    "targetnet.com",
-    "telecharger-soft.com",
-    "thruport.com",
-    "tdmy.com",
-    "telecharger.ws",
-    "tribalfusion.com",
-    "utopiad.com",
-    "web3000.com",
-    "gratisware.com",
-    "grandstreetinteractive.com",
-    "gambling.com",
-    "goclick.com",
-    "gohip.com",
-    "gator.com",
-    "gmx.net",
-    "hit-parade.com",
-    "humanclick.com",
-    "hotbar.com",
-    "hpwis.com",
-    "hitbox.com",
-    "hpg.ig.com.br",
-    "hpg.com.br",
-    "hyperbanner.net",
-    "hypermart.net",
-    "intellitxt.com",
-    "ivwbox.de",
-    "imaginemedia.com",
-    "imrworldwide.com",
-    "inetinteractive.com",
-    "insightexpressai.com",
-    "inspectorclick.com",
-    "internetfuel.com",
-    "iwon.com",
-    "imgis.com",
-    "insightexpress.com",
-    "intellicontact.com",
-    "insightfirst.com",
-    "just404.com",
-    "kadserver.com",
-    "linklist.cc",
-    "linkexchange.com",
-    "links4trade.com",
-    "linkshare.com",
-    "linksponsor.com",
-    "link4ads.com",
-    "livestat.com",
-    "liveadvert.com",
-    "linksynergy.com",
-    "linksummary.com",
-    "liteweb.net",
-    "mtree.com",
-    "malwarewipe.com",
-    "marketscore.com",
-    "maxserving.com",
-    "mywebsearch.com",
-    "nextlevel.com",
-    "netster.com",
-    "nastydollars.com",
-    "pentoninteractive.com",
-    "porntrack.com",
-    "precisionclick.com",
-    "freebannertrade.com",
-    "focalink.com",
-    "friendfinder.com",
-    "flyswat.com",
-    "firehunt.com",
-    "flycast.com",
-    "focalex.com",
-    "flyingcroc.net",
-    "falkag.net",
-    "errorsafe.com",
-    "esomniture.com",
-    "eimg.com",
-    "ezcybersearch.com",
-    "erasercash.com",
-    "extreme-dm.com",
-    "ezgreen.com",
-    "enliven.com",
-    "eacceleration.com",
-    "einets.com",
-    "esthost.com",
-    "euroclick.net",
-    "clicktorrent.info",
-    "count.cc",
-    "click2net.com",
-    "casalemedia.com",
-    "channelintelligence.com",
-    "clicktrade.com",
-    "clickhype.com",
-    "cpxinteractive.com",
-    "coolwebsearch.com",
-    "clrsch.com",
-    "cj.com",
-    "chickclick.com",
-    "comclick.com",
-    "cqcounter.com",
-    "clicksor.com",
-    "climaxbucks.com",
-    "cometsystems.com",
-    "clickfinders.com",
-    "clickagents.com",
-    "conducent.com",
-    "clickability.com",
-    "cjt1.net",
-    "clickbank.net",
-    "doubleclick.com",
-    "direct-revenue.com",
-    "decideinteractive.com",
-    "drsnsrch.com",
-    "directtrack.com",
-    "dotbiz4all.com",
-    "drmwrap.com",
-    "domainsponsor.com",
-    "download-software.us",
-    "descarregar.net",
-    "bannercommunity.de",
-    "bpath.com",
-    "bonzi.com",
-    "bluestreak.com",
-    "bannermall.com",
-    "blogads.com",
-    "bestoffersnetworks.com",
-    "bannerhosts.com",
-    "bfast.com",
-    "bnex.com",
-    "beesearch.info",
-    "baixar.ws",
-    "bannerconnect.net",
-    "bargain-buddy.net",
-    "atdmt.com",
-    "adultadworld.com",
-    "adlink.com",
-    "ads360.com",
-    "affiliatetargetad.com",
-    "advertwizard.com",
-    "adknowledge.com",
-    "adsoftware.com",
-    "andlotsmore.com",
-    "aureate.com",
-    "adbrite.com",
-    "aavalue.com",
-    "advertserve.com",
-    "adsrve.com",
-    "admaximize.com",
-    "adultcash.com",
-    "accessplugin.com",
-    "adsonar.com",
-    "adroar.com",
-    "addr.com",
-    "adrevolver.com",
-    "akamaitechnologies.com",
-    "amazingcounters.com",
-    "allowednet.com",
-    "ad-flow.com",
-    "adflow.com",
-    "alfaspace.net",
-    "advance.net",
-    "akamaitech.net",
-    "akamai.net",
-    "adbureau.net"
+    "ads.google.com",    // Added for Google Ads
+    "tpc.googlesyndication.com",
+    "pagead2.googlesyndication.com",
+    "ad.doubleclick.net",
+    "securepubads.g.doubleclick.net",
+    "pubads.g.doubleclick.net",
+    "adserver.adtech.de",
+    "adserver.adtechus.com",
+    "adsafeprotected.com", // Modern ad verification
+    "moatads.com",         // Ad analytics
+    "serving-sys.com",     // Sizmek ad platform
+    "openx.net",           // OpenX ad exchange
+    "pubmatic.com",        // PubMatic ad platform
+    "indexww.com",         // Index Exchange
+    "smartadserver.com"    // Smart AdServer
 ];
 
 // Main Proxy Auto-Configuration Function
@@ -404,20 +175,22 @@ function FindProxyForURL(url, host) {
         }
     }
 
-    // Ad-blocking logic
-    if (
-        // Match ad-related domains
-        adDomainRegex.test(host) ||
-        // Match ad-related URL patterns
-        adUrlRegex.test(url) ||
-        // Match common ad subdomains
-        adSubdomainRegex.test(host) ||
-        // Match web bugs and Flash ads
-        adWebBugRegex.test(url) ||
-        // Match explicitly blacklisted domains
-        blacklist.indexOf(host) !== -1
-    ) {
-        if (debug) alert("Blocked...\nURL: " + url + "\nHost: " + host);
+    // Ad-blocking logic with detailed debugging
+    var blockReason = "";
+    if (adDomainRegex.test(host)) {
+        blockReason = "Matched adDomainRegex: " + host;
+    } else if (adUrlRegex.test(url)) {
+        blockReason = "Matched adUrlRegex: " + url;
+    } else if (adSubdomainRegex.test(host)) {
+        blockReason = "Matched adSubdomainRegex: " + host;
+    } else if (adWebBugRegex.test(url)) {
+        blockReason = "Matched adWebBugRegex: " + url;
+    } else if (blacklist.indexOf(host) !== -1) {
+        blockReason = "Matched blacklist: " + host;
+    }
+
+    if (blockReason) {
+        if (debug) alert("Blocked...\nReason: " + blockReason + "\nURL: " + url + "\nHost: " + host);
         return blackhole;
     }
 
@@ -428,5 +201,5 @@ function FindProxyForURL(url, host) {
 
 // Initial load notification (if debugging is enabled)
 if (debug) {
-    alert("Fixed PAC file loaded, isEnabled = " + isEnabled);
+    alert("Updated PAC file loaded, isEnabled = " + isEnabled);
 }
